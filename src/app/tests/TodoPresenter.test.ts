@@ -30,4 +30,21 @@ describe("Todo", () => {
     expect(presenter.todoList.length).toBe(1);
     expect(presenter.todoList[0].todo).toBe("우아하게 짐싸기");
   });
+
+  describe("checkTodo 함수 호출 시 반대 boolean 값으로 변경되어야 함", () => {
+    it("한 번 호출 시 반대 boolean값으로 변경", () => {
+      presenter.checkTodo(1);
+
+      expect(presenter.todoList.length).toBe(2);
+      expect(presenter.todoList[0].done).toBe(true);
+    });
+
+    it("두 번 호출 시 boolean값 유지", () => {
+      presenter.checkTodo(1);
+      presenter.checkTodo(1);
+
+      expect(presenter.todoList.length).toBe(2);
+      expect(presenter.todoList[0].done).toBe(false);
+    });
+  });
 });
