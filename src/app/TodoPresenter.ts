@@ -1,7 +1,8 @@
 export interface TodoPresenter {
+  readonly todoList: Todo[];
   addTodo(todo: string): void;
   deleteTodo(id: number): void;
-  readonly todoList: Todo[];
+  checkTodo(id: number): void;
 }
 
 export type Todo = {
@@ -27,5 +28,9 @@ export default class TodoPresenterImpl implements TodoPresenter {
 
   deleteTodo(id: number): void {
     this._todoList = this._todoList.filter((todo) => todo.id !== id);
+  }
+
+  checkTodo(id: number): void {
+    this._todoList = this._todoList.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo));
   }
 }
