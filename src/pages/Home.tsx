@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import styled from "styled-components";
 
 const Home = () => {
-  return <div></div>;
+  return <div>hi</div>;
 };
 
 export default Home;
+
+const Background = styled.main``;
