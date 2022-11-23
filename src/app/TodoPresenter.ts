@@ -1,19 +1,26 @@
 export interface TodoPresenter {
   addTodo(value: string): void;
+  readonly todoList: Todo[];
 }
 
-type Todo = {
+export type Todo = {
   id: number;
   todo: string;
   done: boolean;
 };
 
 export default class TodoPresenterImpl implements TodoPresenter {
-  private todoList: Todo[];
-  constructor(todoList: Todo[]) {
-    this.todoList = todoList;
+  private _todoList: Todo[];
+
+  get todoList() {
+    return this._todoList;
   }
+
+  constructor(todoList: Todo[]) {
+    this._todoList = todoList;
+  }
+
   addTodo(todo: string): void {
-    this.todoList =
+    this._todoList = [...this._todoList, { id: Number(new Date()), todo, done: false }];
   }
 }

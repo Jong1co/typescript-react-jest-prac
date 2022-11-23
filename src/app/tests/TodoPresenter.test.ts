@@ -1,4 +1,4 @@
-import { TodoPresenter } from "./../TodoPresenter";
+import { TodoPresenter, Todo } from "./../TodoPresenter";
 import TodoPresenterImpl from "../TodoPresenter";
 
 describe("Todo", () => {
@@ -9,12 +9,6 @@ describe("Todo", () => {
     { id: 2, todo: "우아하게 짐싸기", done: true },
   ];
 
-  type Todo = {
-    id: number;
-    todo: string;
-    done: boolean;
-  };
-
   beforeEach(() => {
     presenter = new TodoPresenterImpl(todoList);
     addTodo = jest.fn();
@@ -23,8 +17,8 @@ describe("Todo", () => {
   it("increase todoList length when add todo", () => {
     presenter.addTodo("피터지게 공부하기");
 
-    expect(todoList.length).toBe(3);
-    expect(todoList[2].done).toBe(false);
-    expect(todoList[2].todo).toBe("피터지게 공부하기");
+    expect(presenter.todoList.length).toBe(3);
+    expect(presenter.todoList[2].done).toBe(false);
+    expect(presenter.todoList[2].todo).toBe("피터지게 공부하기");
   });
 });
