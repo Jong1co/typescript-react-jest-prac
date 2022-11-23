@@ -1,5 +1,6 @@
 export interface TodoPresenter {
-  addTodo(value: string): void;
+  addTodo(todo: string): void;
+  deleteTodo(id: number): void;
   readonly todoList: Todo[];
 }
 
@@ -22,5 +23,9 @@ export default class TodoPresenterImpl implements TodoPresenter {
 
   addTodo(todo: string): void {
     this._todoList = [...this._todoList, { id: Number(new Date()), todo, done: false }];
+  }
+
+  deleteTodo(id: number): void {
+    this._todoList = this._todoList.filter((todo) => todo.id !== id);
   }
 }
