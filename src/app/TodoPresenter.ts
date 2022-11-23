@@ -1,8 +1,8 @@
 export interface TodoPresenter {
   readonly todoList: Todo[];
-  addTodo(todo: string): void;
-  deleteTodo(id: number): void;
-  checkTodo(id: number): void;
+  addTodo(todo: string, update: (todoList: Todo[]) => void): void;
+  deleteTodo(id: number, update: (todoList: Todo[]) => void): void;
+  checkTodo(id: number, update: (todoList: Todo[]) => void): void;
 }
 
 export type Todo = {
@@ -22,15 +22,18 @@ export default class TodoPresenterImpl implements TodoPresenter {
     this._todoList = todoList;
   }
 
-  addTodo(todo: string): void {
+  addTodo(todo: string, update: (todoList: Todo[]) => void): void {
     this._todoList = [...this._todoList, { id: Number(new Date()), todo, done: false }];
+    update(this._todoList);
   }
 
-  deleteTodo(id: number): void {
+  deleteTodo(id: number, update: (todoList: Todo[]) => void): void {
     this._todoList = this._todoList.filter((todo) => todo.id !== id);
+    update(this._todoList);
   }
 
-  checkTodo(id: number): void {
+  checkTodo(id: number, update: (todoList: Todo[]) => void): void {
     this._todoList = this._todoList.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo));
+    update(this._todoList);
   }
 }
