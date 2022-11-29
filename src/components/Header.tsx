@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { login, logout, onUserStateChange } from "../api/firebase";
-import { User as FirebaseUser } from "@firebase/auth";
+import { User } from "@firebase/auth";
 
 const Header = () => {
   // 왜 안 됨?
-  // const [user, setUser] = useState<FirebaseUser | null | void>(null);
+  // const [user, setUser] = useState<User | null | void>(null);
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
@@ -72,10 +72,12 @@ const HeaderBar = styled.header`
   padding: 12px;
   display: flex;
   justify-content: space-between;
+
   .header__left {
     display: flex;
     align-items: center;
   }
+
   .header__right {
     display: flex;
     align-items: center;
@@ -90,6 +92,7 @@ const HeaderBar = styled.header`
     margin-left: 8px;
     font-size: 24px;
   }
+
   .profile {
     width: 24px;
     border-radius: 50%;
