@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { login, logout, onUserStateChange } from "../api/firebase";
+import { login, logout, onUserStateChange, checkAdminKey } from "../api/firebase";
 import { User } from "@firebase/auth";
 
 const Header = () => {
   // 왜 안 됨?
   // const [user, setUser] = useState<User | null | void>(null);
   const [user, setUser] = useState<any>(null);
+  console.log(user);
 
   useEffect(() => {
     onUserStateChange((user) => {
@@ -62,6 +63,10 @@ const Header = () => {
           </>
         )}
       </div>
+      <button
+        onClick={() => {
+          checkAdminKey();
+        }}></button>
     </HeaderBar>
   );
 };

@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 import { User } from "firebase/auth";
-import { getDatabase } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -23,9 +23,11 @@ export const login = async () => {
     .then((result) => {
       const credential: any = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
-      sessionStorage.setItem("token", token);
       const user = result.user;
-      return user;
+
+      if (checkAdminKey() === token) return { ...user, admin: true };
+      // sessionStorage.setItem("token", token);
+      return { ...user, admin: false };
     })
     .catch((error) => {
       console.log(error);
@@ -39,5 +41,22 @@ export const logout = async () => {
 export const onUserStateChange = async (callback: (user: User | null) => void) => {
   onAuthStateChanged(auth, (user) => {
     callback(user);
+  });
+};
+
+function writeUserData(userId: string, name: string, email: string, imageUrl: string) {
+  set(ref(database, "users/" + userId), {
+    username: name,
+    email: email,
+    profile_picture: imageUrl,
+  });
+}
+
+export const checkAdminKey = () => {
+  const starCountRef = ref(database, "admin");
+  onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+    return data;
+    // updateStarCount(postElement, data);
   });
 };
