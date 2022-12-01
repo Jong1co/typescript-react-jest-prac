@@ -1,7 +1,15 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  signOut,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { User } from "firebase/auth";
-import { getDatabase, ref, set, onValue, get, child } from "firebase/database";
+import { getDatabase, ref, set, get } from "firebase/database";
+import { Product } from "../pages/AddProduct";
+import { v4 as uuid } from "uuid";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -16,19 +24,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
-const dbRef = ref(getDatabase(app));
 const provider = new GoogleAuthProvider();
+
+export const addNewProduct = async (product: Product, imageUrl: string) => {
+  const id = uuid();
+  set(ref(database, `products/${id}`), {
+    ...product,
+    id,
+    imageUrl,
+    options: product.options.split(","),
+  });
+};
 
 export const login = async () => {
   return signInWithPopup(auth, provider)
     .then((result) => {
-      const credential: any = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
       const user = result.user;
-      console.log(user);
-
-      // if (checkAdminEmail() === user.email) return { ...user, admin: true };
-      // sessionStorage.setItem("token", token);
       return { ...user, admin: false };
     })
     .catch((error) => {
@@ -58,11 +69,3 @@ export const onUserStateChange = async (callback: (user: User | null) => void) =
     callback(updatedUser);
   });
 };
-
-// function writeUserData(userId: string, name: string, email: string, imageUrl: string) {
-//   set(ref(database, "users/" + userId), {
-//     username: name,
-//     email: email,
-//     profile_picture: imageUrl,
-//   });
-// }

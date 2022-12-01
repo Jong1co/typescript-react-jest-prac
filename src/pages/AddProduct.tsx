@@ -2,8 +2,9 @@ import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import Layout from "../layout/Layout";
 import { uploadImage } from "../api/uploader";
+import { addNewProduct } from "../api/firebase";
 
-type Product = {
+export type Product = {
   title: string;
   price: number | "";
   category: string;
@@ -32,7 +33,10 @@ const AddProduct = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (file != null) uploadImage(file).then((url) => console.log(url));
+    if (file != null) {
+      uploadImage(file) //
+        .then((url) => addNewProduct(product, url));
+    }
   };
 
   return (
