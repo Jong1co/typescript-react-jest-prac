@@ -2,8 +2,25 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Layout from "../layout/Layout";
 
+type Product = {
+  title: string;
+  price: number | "";
+  category: string;
+  description: string;
+  options: string;
+};
+
 const AddProduct = () => {
-  const [productImg, setProductImg] = useState();
+  const [file, setFile] = useState("");
+  const [product, setProduct] = useState<Product>({
+    title: "",
+    price: "",
+    category: "",
+    description: "",
+    options: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
 
   return (
     <Layout>
@@ -15,16 +32,23 @@ const AddProduct = () => {
         }}>
         <input
           type='file'
-          accept='image/png, image/jpeg'
+          accept='image/*'
+          required
           onChange={(e) => {
             console.log(e.target.value);
           }}
         />
-        <input type='text' placeholder='제품명' />
-        <input type='text' placeholder='가격' />
-        <input type='text' placeholder='카테고리' />
-        <input type='text' placeholder='제품 설명' />
-        <input type='text' placeholder='옵션들(콤마(,)로 구분)' />
+        <input type='text' required value={product.title} onChange={handleChange} placeholder='제품명' />
+        <input type='number' required value={product.price} onChange={handleChange} placeholder='가격' />
+        <input type='text' required value={product.category} onChange={handleChange} placeholder='카테고리' />
+        <input type='text' required value={product.description} onChange={handleChange} placeholder='제품 설명' />
+        <input
+          type='text'
+          required
+          value={product.options}
+          onChange={handleChange}
+          placeholder='옵션들(콤마(,)로 구분)'
+        />
         <button>제품 등록</button>
       </AddProductForm>
     </Layout>
