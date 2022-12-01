@@ -6,7 +6,7 @@ import { addNewProduct } from "../api/firebase";
 
 export type Product = {
   title: string;
-  price: number | "";
+  price: string;
   category: string;
   description: string;
   options: string;

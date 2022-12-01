@@ -32,6 +32,7 @@ export const addNewProduct = async (product: Product, imageUrl: string) => {
     ...product,
     id,
     imageUrl,
+    price: parseInt(product.price),
     options: product.options.split(","),
   });
 };
