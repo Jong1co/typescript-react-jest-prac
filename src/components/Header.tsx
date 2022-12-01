@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { login, logout, onUserStateChange } from "../api/firebase";
-import { User } from "@firebase/auth";
 
 const Header = () => {
   // 왜 안 됨?

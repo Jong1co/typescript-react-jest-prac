@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import Layout from "../layout/Layout";
+import { Cloudinary } from "@cloudinary/url-gen";
 
 type Product = {
   title: string;
@@ -20,7 +21,11 @@ const AddProduct = () => {
     options: "",
   });
 
-  console.log(file, product);
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "dwohpjji9",
+    },
+  });
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value, files } = e.target;
@@ -38,7 +43,9 @@ const AddProduct = () => {
   return (
     <Layout>
       <h3>새로운 제품 등록</h3>
-      <AddProductForm action='' onSubmit={handleSubmit}>
+      <AddProductForm onSubmit={handleSubmit}>
+        {/* file data를 출력할 때에는 URL.createObjectURL 사용 */}
+        {file && <img src={URL.createObjectURL(file)} alt='preview' />}
         <input type='file' accept='image/*' name='file' required onChange={handleChange} />
         <input
           type='text'

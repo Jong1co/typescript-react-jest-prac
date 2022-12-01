@@ -1,5 +1,4 @@
 import Banner from "../components/Banner";
-import Header from "../components/Header";
 import ItemCardSection from "../components/ItemCardSection";
 import Layout from "../layout/Layout";
 
