@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import Layout from "../layout/Layout";
-import { Cloudinary } from "@cloudinary/url-gen";
+import { uploadImage } from "../api/uploader";
 
 type Product = {
   title: string;
@@ -21,12 +21,6 @@ const AddProduct = () => {
     options: "",
   });
 
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: "dwohpjji9",
-    },
-  });
-
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value, files } = e.target;
     if (name === "file" && files != null) {
@@ -38,6 +32,7 @@ const AddProduct = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (file != null) uploadImage(file).then((url) => console.log(url));
   };
 
   return (
