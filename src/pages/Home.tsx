@@ -6,7 +6,6 @@ import Layout from "../layout/Layout";
 const Home = () => {
   return (
     <Layout>
-      <Header />
       <Banner />
       <ItemCardSection />
     </Layout>

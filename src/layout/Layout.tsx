@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import Header from "../components/Header";
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 const Layout = ({ children }: LayoutProps) => {
-  return <StyledLayout>{children}</StyledLayout>;
+  return (
+    <StyledLayout>
+      <Header />
+      {children}
+    </StyledLayout>
+  );
 };
 
 export default Layout;
