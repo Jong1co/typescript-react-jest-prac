@@ -7,9 +7,10 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { User } from "firebase/auth";
-import { getDatabase, ref, set, get } from "firebase/database";
+import { getDatabase, ref, set, get, onValue } from "firebase/database";
 import { Product } from "../pages/AddProduct";
 import { v4 as uuid } from "uuid";
+import { ProductList } from "../components/ProductCardSection";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -68,5 +69,13 @@ export const onUserStateChange = async (callback: (user: User | null) => void) =
   onAuthStateChanged(auth, async (user) => {
     const updatedUser = user ? await adminUser(user) : null;
     callback(updatedUser);
+  });
+};
+
+export const getProducts = async (): Promise<ProductList[] | undefined> => {
+  return get(ref(database, "products/")).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    }
   });
 };
