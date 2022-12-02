@@ -18,10 +18,8 @@ const Layout = ({ children }: LayoutProps) => {
 export default Layout;
 
 const StyledLayout = styled.main`
-  /* width: 100vw; */
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-
+  width: 100%;
   max-width: 1200px;
 `;

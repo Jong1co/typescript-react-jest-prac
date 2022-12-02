@@ -3,6 +3,8 @@ import ItemCard from "./ProductCard";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../api/firebase";
 import { Product } from "../pages/AddProduct";
+import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 
 export type ProductList = Product & {
   id: string;
@@ -22,12 +24,35 @@ const ProductCardSection = () => {
 
   if (isLoading) return <div>Loding...</div>;
   return (
-    <div>
+    <CardSection>
       {products?.map((product) => {
-        return <ItemCard key={product.id} product={product} />;
+        return (
+          <CardLink key={product.id} to={`/product/${product.id}`}>
+            <ItemCard product={product} />
+          </CardLink>
+        );
       })}
-    </div>
+    </CardSection>
   );
 };
 
 export default ProductCardSection;
+
+const CardSection = styled.section`
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+`;
+
+const CardLink = styled(Link)`
+  text-decoration: none;
+  width: 18.5%;
+  color: black;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;

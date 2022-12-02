@@ -1,12 +1,12 @@
 import Banner from "../components/Banner";
-import ItemCardSection from "../components/ProductCardSection";
+import ProductCardSection from "../components/ProductCardSection";
 import Layout from "../layout/Layout";
 
 const Home = () => {
   return (
     <Layout>
       <Banner />
-      <ItemCardSection />
+      <ProductCardSection />
     </Layout>
   );
 };

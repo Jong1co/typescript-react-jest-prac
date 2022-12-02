@@ -38,7 +38,6 @@ const BannerBlock = styled.section`
     width: 100%;
   }
   img {
-    max-width: 1200px;
     height: 250px;
     width: 100%;
     object-fit: cover;

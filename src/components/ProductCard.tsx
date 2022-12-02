@@ -1,4 +1,4 @@
-import React from "react";
+import styled from "styled-components";
 import { ProductList } from "./ProductCardSection";
 
 type ProductCardProps = {
@@ -6,7 +6,24 @@ type ProductCardProps = {
 };
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  return <div>{product.id}</div>;
+  return (
+    <Card>
+      <img src={product.imageUrl} alt={product.title} />
+      <div>
+        <div className=''>
+          <div>{product.title}</div>
+          <div>&#8361;{product.price}</div>
+        </div>
+        <div>{product.category}</div>
+      </div>
+    </Card>
+  );
 };
 
 export default ProductCard;
+
+const Card = styled.div`
+  margin: 16px 8px;
+  display: flex;
+  flex-flow: column nowrap;
+`;
