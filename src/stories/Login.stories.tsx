@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import LoginButton, { LoginButtonProps } from "../Atoms/LoginButton";
+import LoginButton from "../Atoms/LoginButton";
 
 export default {
   title: "Header",

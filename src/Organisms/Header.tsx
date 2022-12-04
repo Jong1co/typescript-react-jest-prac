@@ -33,7 +33,6 @@ const Header = () => {
       <div className='header__right'>
         <span>Products</span>
         <SVGButton param='my-cart' />
-
         {user?.isAdmin && <SVGButton param='add-product' />}
         {user === null ? (
           <LoginButton loginHandler={handleLogin} text='Login' />

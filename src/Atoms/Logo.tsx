@@ -30,6 +30,7 @@ const HeaderLogo = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  width: 200px;
 
   .title {
     color: #fa6161;
