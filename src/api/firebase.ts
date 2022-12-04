@@ -79,3 +79,13 @@ export const getProducts = async (): Promise<ProductList[] | undefined> => {
     }
   });
 };
+
+export const getProductDetail = async (id: string): Promise<ProductList | undefined> => {
+  return get(ref(database, `products/${id}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+      return snapshot.val();
+    }
+    console.log(snapshot);
+  });
+};
