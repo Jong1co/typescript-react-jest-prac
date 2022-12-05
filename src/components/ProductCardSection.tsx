@@ -2,11 +2,13 @@ import React from "react";
 import ItemCard from "./ProductCard";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../api/firebase";
-import { Product } from "../pages/AddProduct";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export type ProductList = Product & {
+export type ProductList = {
+  title: string;
+  category: string;
+  description: string;
   id: string;
   imageUrl: string;
   options: string[];
@@ -42,11 +44,11 @@ const CardSection = styled.section`
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 const CardLink = styled(Link)`
   text-decoration: none;
-  width: 18.5%;
   color: black;
   &:focus,
   &:hover,

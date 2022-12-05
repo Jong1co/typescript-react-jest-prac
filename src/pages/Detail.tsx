@@ -1,9 +1,7 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../layout/Layout";
 import { getProductDetail } from "../api/firebase";
 import { useQuery } from "@tanstack/react-query";
-import { ProductList } from "../components/ProductCardSection";
 import { STALE_TIME } from "../utils/constant";
 
 const Detail = () => {
