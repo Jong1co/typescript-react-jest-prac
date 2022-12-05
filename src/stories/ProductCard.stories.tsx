@@ -1,6 +1,6 @@
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../Molecules/ProductCard";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import ProductCardSection from "../components/ProductCardSection";
+import ProductCardSection from "../Organisms/ProductCardSection";
 
 export default {
   title: "ProductCard",

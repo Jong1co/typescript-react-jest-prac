@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ProductList } from "./ProductCardSection";
+import { ProductList } from "../Organisms/ProductCardSection";
 
 type ProductCardProps = {
   product: Pick<ProductList, "imageUrl" | "title" | "category" | "price">;

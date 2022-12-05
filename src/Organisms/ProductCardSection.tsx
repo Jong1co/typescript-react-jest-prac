@@ -1,5 +1,5 @@
 import React from "react";
-import ItemCard from "./ProductCard";
+import ItemCard from "../Molecules/ProductCard";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../api/firebase";
 import styled from "styled-components";

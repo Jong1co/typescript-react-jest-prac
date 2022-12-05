@@ -10,7 +10,7 @@ import { User } from "firebase/auth";
 import { getDatabase, ref, set, get, onValue } from "firebase/database";
 import { Product } from "../pages/AddProduct";
 import { v4 as uuid } from "uuid";
-import { ProductList } from "../components/ProductCardSection";
+import { ProductList } from "../Organisms/ProductCardSection";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,

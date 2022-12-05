@@ -1,5 +1,5 @@
-import Banner from "../components/Banner";
-import ProductCardSection from "../components/ProductCardSection";
+import Banner from "../Molecules/Banner";
+import ProductCardSection from "../Organisms/ProductCardSection";
 import Layout from "../layout/Layout";
 
 const Home = () => {

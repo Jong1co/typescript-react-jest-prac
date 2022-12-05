@@ -6,7 +6,6 @@ import LoginButton from "../Atoms/LoginButton";
 import SVGButton from "../Atoms/SVGButton";
 
 const Header = () => {
-  // 왜 안 됨?
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {

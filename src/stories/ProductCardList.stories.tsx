@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import ProductCardSection from "../components/ProductCardSection";
+import ProductCardSection from "../Organisms/ProductCardSection";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 export default {
   title: "ProductCard",
