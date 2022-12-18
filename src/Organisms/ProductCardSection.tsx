@@ -41,10 +41,9 @@ const ProductCardSection = () => {
 export default ProductCardSection;
 
 const CardSection = styled.section`
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-gap: 8px;
 `;
 
 const CardLink = styled(Link)`

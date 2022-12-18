@@ -1,4 +1,4 @@
-import banner from "../images/banner.jpg";
+import banner from "../assets/banner.jpg";
 import styled from "styled-components";
 
 const Banner = () => {

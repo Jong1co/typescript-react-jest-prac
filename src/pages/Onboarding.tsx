@@ -8,10 +8,7 @@ const Onboarding = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (location.current != null) {
-        // console.log((location.current as HTMLElement).getBoundingClientRect());
-      }
-      setOpacity(window.scrollY / 500);
+      setOpacity(window.scrollY / 2000);
     });
 
     return () => {
@@ -21,10 +18,13 @@ const Onboarding = () => {
     };
   }, []);
 
-  console.log(opacity);
+  // console.log(opacity);
 
   return (
     <Background ref={location}>
+      <TitleOrigin opacity={opacity}>
+        안녕하세요 <br /> zz
+      </TitleOrigin>
       <Title opacity={opacity}>
         안녕하세요 <br /> zz
       </Title>
@@ -36,7 +36,7 @@ export default Onboarding;
 
 const Background = styled.div`
   background-color: #222222;
-  height: 200vh;
+  height: 1000vh;
   text-align: center;
 `;
 
@@ -44,11 +44,24 @@ const Title = styled.h1<{ opacity: number }>`
   position: fixed;
   top: 32px;
   margin: 0;
-  color: white;
-  font-size: 60px;
-  background: linear-gradient(to right top, #861657, #ffa69e);
   color: transparent;
-  -webkit-background-clip: text;
-  // 글자에만 background 적용하는 css
   opacity: ${({ opacity }) => (opacity < 1 ? opacity : 1)};
+  font-size: 60px;
+  background: linear-gradient(rgb(255, 111, 15) 0%, rgb(132, 130, 242) 100%);
+  z-index: 2;
+  // 글자에만 background 적용하는 css
+  -webkit-background-clip: text;
+`;
+
+const TitleOrigin = styled.h1<{ opacity: number }>`
+  position: fixed;
+  top: 32px;
+  margin: 0;
+  color: white;
+  opacity: ${({ opacity }) => (opacity < 1 ? 1 - opacity : 0)};
+  font-size: 60px;
+  background: linear-gradient(rgb(255, 111, 15) 0%, rgb(132, 130, 242) 100%);
+  z-index: 1;
+  // 글자에만 background 적용하는 css
+  -webkit-background-clip: text;
 `;

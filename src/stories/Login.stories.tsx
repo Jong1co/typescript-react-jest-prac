@@ -1,20 +1,20 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import LoginButton from "../Atoms/LoginButton";
+import Button from "../Atoms/Button";
 
 export default {
   title: "Header",
-  component: LoginButton,
-} as ComponentMeta<typeof LoginButton>;
+  component: Button,
+} as ComponentMeta<typeof Button>;
 
-const Template: ComponentStory<typeof LoginButton> = (args) => <LoginButton {...args} />;
+const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 export const Login = Template.bind({});
 Login.args = {
   text: "Login",
-  loginHandler: () => console.log("login"),
+  onClickHandler: () => console.log("login"),
 };
 
 export const Logout = Template.bind({});
 Logout.args = {
   text: "Logout",
-  loginHandler: () => console.log("logout"),
+  onClickHandler: () => console.log("logout"),
 };

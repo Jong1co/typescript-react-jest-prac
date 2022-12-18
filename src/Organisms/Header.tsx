@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getProducts, login, logout, onUserStateChange } from "../api/firebase";
 import Logo from "../Atoms/Logo";
-import LoginButton from "../Atoms/LoginButton";
+import Button from "../Atoms/Button";
 import SVGButton from "../Atoms/SVGButton";
 
 const Header = () => {
@@ -34,11 +34,11 @@ const Header = () => {
         <SVGButton param='my-cart' />
         {user?.isAdmin && <SVGButton param='add-product' />}
         {user === null ? (
-          <LoginButton loginHandler={handleLogin} text='Login' />
+          <Button onClickHandler={handleLogin} text='Login' />
         ) : (
           <>
             <img src={user.photoURL} alt='profile' className='profile' />
-            <LoginButton loginHandler={handleLogout} text='Logout' />
+            <Button onClickHandler={handleLogout} text='Logout' />
           </>
         )}
       </div>

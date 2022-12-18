@@ -27,7 +27,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
 export default ProductCard;
 
 const Card = styled.div`
-  width: 200px;
   border-radius: 8px;
   box-shadow: 0 0 5px 0 lightgray;
   display: flex;

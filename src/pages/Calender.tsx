@@ -1,38 +1,32 @@
 import dayjs from "dayjs";
 import Day from "../Atoms/Day";
-
+import cal, { CalenderParams, Month } from "../api/calender";
+import { useState, useCallback } from "react";
 const Calender = () => {
-  const date = dayjs("2022-8");
-  //그 달의 날짜
-  const lastDateInMonth = date.daysInMonth();
+  const [monthDate, setMonthDate] = useState<CalenderParams>({
+    year: dayjs().year(),
+    month: dayjs().month(),
+  });
 
-  //그 주의 시작 요일 /일 : 0/토: 6/
-  const firstDay = date.startOf("month").day();
-  const lastDay = date.endOf("month").day();
-
-  // const dayArray = new Array(7).fill([] as number[])
-  // fill을 하면 같은 주소값을 가진 배열이 계속 채워짐
-  //
-  const dayArray: number[][] = [[], [], [], [], [], [], []];
-  for (let i = 0; i < lastDateInMonth; i++) {
-    const day = (firstDay + i) % 7;
-    dayArray[day].push(i + 1);
-  }
-  for (let i = 0; i < firstDay; i++) {
-    dayArray[i].unshift(0);
-  }
-
-  if (lastDay !== 6) {
-    for (let i = 1; i + lastDay <= 6; i++) {
-      dayArray[i + lastDay].push(0);
-    }
-  }
-
-  console.log(dayArray);
+  const makeCalender = useCallback(
+    (date: CalenderParams) => {
+      return cal(date);
+    },
+    [monthDate]
+  );
 
   return (
-    <div>
-      <Day date={1}></Day>
+    <div style={{ display: "flex" }}>
+      {makeCalender(monthDate).map((dayColumn) => {
+        return (
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {dayColumn.map((date) => {
+              console.log(`${monthDate.year}-${monthDate.month}-${date}`);
+              return <Day key={`${monthDate.year}-${monthDate.month}-${date}`} date={date} />;
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 };
