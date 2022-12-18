@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import Day from "../Atoms/Day";
-import cal, { CalenderParams, Month } from "../api/calender";
+import calender, { CalenderParams, movePrevMonth, moveNextMonth } from "../api/calender";
 import { useState, useCallback } from "react";
 const Calender = () => {
   const [monthDate, setMonthDate] = useState<CalenderParams>({
@@ -10,18 +10,38 @@ const Calender = () => {
 
   const makeCalender = useCallback(
     (date: CalenderParams) => {
-      return cal(date);
+      return calender(date);
     },
     [monthDate]
   );
 
   return (
     <div style={{ display: "flex" }}>
+      <button
+        onClick={() => {
+          movePrevMonth(monthDate, setMonthDate);
+        }}
+      >
+        이전달
+      </button>
+      <button
+        onClick={() => {
+          moveNextMonth(monthDate, setMonthDate);
+        }}
+      >
+        다음달
+      </button>
       {makeCalender(monthDate).map((dayColumn) => {
         return (
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", flexDirection: "column" }} key={dayColumn[0].day}>
             {dayColumn.map((date) => {
-              return <Day key={`${monthDate.year}-${monthDate.month}-${date}`} date={date} />;
+              return (
+                <Day
+                  key={`${date.year}-${date.month}-${date.day}`}
+                  date={date}
+                  currentMonth={monthDate.month}
+                />
+              );
             })}
           </div>
         );

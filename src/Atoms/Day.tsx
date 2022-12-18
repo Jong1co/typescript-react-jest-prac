@@ -1,15 +1,22 @@
 import React from "react";
+import { CalenderDate } from "../api/calender";
 
 type DayProps = {
-  date: number;
+  date: CalenderDate;
+  currentMonth: number;
 };
 
-const Day = ({ date }: DayProps) => {
+const Day = ({ date, currentMonth }: DayProps) => {
   return (
     <div
-      style={{ width: "100px", height: "100px", background: date ? "red" : "gray", margin: "8px" }}
+      style={{
+        width: "100px",
+        height: "100px",
+        background: date.month === currentMonth ? "red" : "gray",
+        margin: "8px",
+      }}
     >
-      {date !== 0 && date}
+      {date.day}
     </div>
   );
 };
