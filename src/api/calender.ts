@@ -7,8 +7,15 @@ export type CalenderParams = {
   month: number;
 };
 
+/**
+ * sun: 0, mon: 1, ... , sat: 6
+ * 각각의 요일에 해당하는 날짜가 들어가 있음
+ * 2022년 12월의 일요일은 4, 11, 18, 25
+ */
 const makeCalender = ({ year, month }: CalenderParams): number[][] => {
   const date = dayjs(`${year}-${month}`);
+  const prevMonth = dayjs(`${month === 1 ? year - 1 : year}-${month === 1 ? 12 : month - 1}`);
+
   //그 달의 날짜
   const lastDateInMonth = date.daysInMonth();
 
@@ -16,21 +23,19 @@ const makeCalender = ({ year, month }: CalenderParams): number[][] => {
   const firstDay = date.startOf("month").day();
   const lastDay = date.endOf("month").day();
 
-  // const dayArray = new Array(7).fill([] as number[])
-  // fill을 하면 같은 주소값을 가진 배열이 계속 채워짐
-  //
   const dayArray: number[][] = [[], [], [], [], [], [], []];
   for (let i = 0; i < lastDateInMonth; i++) {
     const day = (firstDay + i) % 7;
     dayArray[day].push(i + 1);
   }
+
   for (let i = 0; i < firstDay; i++) {
-    dayArray[i].unshift(0);
+    dayArray[firstDay - 1 - i].unshift(prevMonth.daysInMonth() - i);
   }
 
   if (lastDay !== 6) {
     for (let i = 1; i + lastDay <= 6; i++) {
-      dayArray[i + lastDay].push(0);
+      dayArray[i + lastDay].push(i);
     }
   }
 

@@ -5,7 +5,7 @@ import { useState, useCallback } from "react";
 const Calender = () => {
   const [monthDate, setMonthDate] = useState<CalenderParams>({
     year: dayjs().year(),
-    month: dayjs().month(),
+    month: dayjs().month() + 1,
   });
 
   const makeCalender = useCallback(
@@ -21,7 +21,6 @@ const Calender = () => {
         return (
           <div style={{ display: "flex", flexDirection: "column" }}>
             {dayColumn.map((date) => {
-              console.log(`${monthDate.year}-${monthDate.month}-${date}`);
               return <Day key={`${monthDate.year}-${monthDate.month}-${date}`} date={date} />;
             })}
           </div>
